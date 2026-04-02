@@ -43,14 +43,14 @@ defineProps({
                         <iframe
                             :src="embedUrl"
                             class="absolute inset-0 h-full w-full"
-                            title="Sermon video"
+                            title="Message video"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             allowfullscreen
                         />
                     </div>
                 </div>
                 <p v-else class="text-center text-slate-600">
-                    This sermon does not have a playable video link. Please contact the church if you need help.
+                    This message does not have a playable video link. Please contact the church if you need help.
                 </p>
             </SectionContainer>
         </section>

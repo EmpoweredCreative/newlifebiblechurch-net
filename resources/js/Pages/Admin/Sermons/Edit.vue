@@ -31,11 +31,11 @@ const submit = () => {
 
 <template>
     <AuthenticatedLayout>
-        <Head title="Edit sermon" />
+        <Head title="Edit message" />
 
         <template #header>
             <div class="flex flex-wrap items-center justify-between gap-4">
-                <h2 class="text-xl font-semibold leading-tight text-gray-800">Edit sermon</h2>
+                <h2 class="text-xl font-semibold leading-tight text-gray-800">Edit message</h2>
                 <Link :href="route('admin.sermons.index')" class="text-sm font-medium text-gray-600 hover:text-gray-900">
                     Back to list
                 </Link>
@@ -93,7 +93,7 @@ const submit = () => {
                     </div>
 
                     <div class="flex justify-end">
-                        <PrimaryButton :disabled="form.processing">Update sermon</PrimaryButton>
+                        <PrimaryButton :disabled="form.processing">Update message</PrimaryButton>
                     </div>
                 </form>
             </div>

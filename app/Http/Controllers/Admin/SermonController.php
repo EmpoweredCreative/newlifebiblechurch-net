@@ -36,7 +36,7 @@ class SermonController extends Controller
     {
         Sermon::query()->create($request->validated());
 
-        return redirect()->route('admin.sermons.index')->with('success', 'Sermon published.');
+        return redirect()->route('admin.sermons.index')->with('success', 'Message published.');
     }
 
     public function edit(Sermon $sermon): Response
@@ -56,13 +56,13 @@ class SermonController extends Controller
     {
         $sermon->update($request->validated());
 
-        return redirect()->route('admin.sermons.index')->with('success', 'Sermon updated.');
+        return redirect()->route('admin.sermons.index')->with('success', 'Message updated.');
     }
 
     public function destroy(Sermon $sermon): RedirectResponse
     {
         $sermon->delete();
 
-        return redirect()->route('admin.sermons.index')->with('success', 'Sermon removed.');
+        return redirect()->route('admin.sermons.index')->with('success', 'Message removed.');
     }
 }

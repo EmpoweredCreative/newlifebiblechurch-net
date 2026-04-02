@@ -5,7 +5,8 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
+import { computed } from 'vue';
 
 defineProps({
     canResetPassword: {
@@ -15,6 +16,9 @@ defineProps({
         type: String,
     },
 });
+
+const page = usePage();
+const errorMessage = computed(() => page.props.error);
 
 const form = useForm({
     email: '',
@@ -35,6 +39,14 @@ const submit = () => {
 
         <div v-if="status" class="mb-4 text-sm font-medium text-green-600">
             {{ status }}
+        </div>
+
+        <div
+            v-if="errorMessage"
+            class="mb-4 rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800"
+            role="alert"
+        >
+            {{ errorMessage }}
         </div>
 
         <form @submit.prevent="submit">
@@ -78,7 +90,13 @@ const submit = () => {
                 </label>
             </div>
 
-            <div class="mt-4 flex items-center justify-end">
+            <div class="mt-4 flex flex-wrap items-center justify-end gap-x-4 gap-y-2">
+                <Link
+                    :href="route('register')"
+                    class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                >
+                    Request an account
+                </Link>
                 <Link
                     v-if="canResetPassword"
                     :href="route('password.request')"

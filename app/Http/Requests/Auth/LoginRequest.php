@@ -50,6 +50,17 @@ class LoginRequest extends FormRequest
             ]);
         }
 
+        $user = Auth::user();
+        if ($user && ! $user->isApproved()) {
+            Auth::logout();
+
+            RateLimiter::hit($this->throttleKey());
+
+            throw ValidationException::withMessages([
+                'email' => 'Your account is still pending approval. You will receive an email when you can sign in.',
+            ]);
+        }
+
         RateLimiter::clear($this->throttleKey());
     }
 

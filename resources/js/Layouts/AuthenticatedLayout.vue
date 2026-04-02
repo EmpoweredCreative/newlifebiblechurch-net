@@ -47,7 +47,7 @@ const isAdmin = computed(() => Boolean(page.props.auth?.user?.is_admin));
                                     :href="route('admin.sermons.index')"
                                     :active="route().current('admin.sermons.*')"
                                 >
-                                    Sermons
+                                    Messages
                                 </NavLink>
                             </div>
                         </div>
@@ -161,7 +161,7 @@ const isAdmin = computed(() => Boolean(page.props.auth?.user?.is_admin));
                             :href="route('admin.sermons.index')"
                             :active="route().current('admin.sermons.*')"
                         >
-                            Sermons
+                            Messages
                         </ResponsiveNavLink>
                     </div>
 

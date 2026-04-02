@@ -4,27 +4,76 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
+import { computed, onMounted } from 'vue';
+
+const page = usePage();
+const errorMessage = computed(() => page.props.error);
 
 const form = useForm({
     name: '',
     email: '',
     password: '',
     password_confirmation: '',
+    website: '',
+    form_started_at: 0,
+});
+
+onMounted(() => {
+    form.form_started_at = Date.now();
 });
 
 const submit = () => {
     form.post(route('register'), {
-        onFinish: () => form.reset('password', 'password_confirmation'),
+        onFinish: () => {
+            form.reset('password', 'password_confirmation');
+            form.form_started_at = Date.now();
+        },
     });
 };
 </script>
 
 <template>
     <GuestLayout>
-        <Head title="Register" />
+        <Head title="Request an account" />
 
-        <form @submit.prevent="submit">
+        <p class="mb-4 text-sm text-gray-600">
+            Submit this form to request access. An administrator will review your registration and you will receive an
+            email when your account is approved.
+        </p>
+
+        <div
+            v-if="errorMessage"
+            class="mb-4 rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800"
+            role="alert"
+        >
+            {{ errorMessage }}
+        </div>
+
+        <p
+            v-if="form.errors.form_started_at"
+            class="mb-4 rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800"
+            role="alert"
+        >
+            {{ form.errors.form_started_at }}
+        </p>
+
+        <form class="relative" @submit.prevent="submit">
+            <div
+                class="absolute -left-[10000px] h-0 w-0 overflow-hidden"
+                aria-hidden="true"
+            >
+                <label for="reg_website">Website</label>
+                <input
+                    id="reg_website"
+                    v-model="form.website"
+                    type="text"
+                    name="website"
+                    tabindex="-1"
+                    autocomplete="off"
+                />
+            </div>
+
             <div>
                 <InputLabel for="name" value="Name" />
 
@@ -97,7 +146,7 @@ const submit = () => {
                     :href="route('login')"
                     class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
-                    Already registered?
+                    Already have an account?
                 </Link>
 
                 <PrimaryButton
@@ -105,7 +154,7 @@ const submit = () => {
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
-                    Register
+                    Submit request
                 </PrimaryButton>
             </div>
         </form>

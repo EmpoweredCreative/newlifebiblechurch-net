@@ -18,12 +18,12 @@ const flash = computed(() => page.props.success);
 
 <template>
     <AuthenticatedLayout>
-        <Head title="Sermons" />
+        <Head title="Messages" />
 
         <template #header>
             <div class="flex flex-wrap items-center justify-between gap-4">
-                <h2 class="text-xl font-semibold leading-tight text-gray-800">Sermons</h2>
-                <PrimaryButton :href="route('admin.sermons.create')">New sermon</PrimaryButton>
+                <h2 class="text-xl font-semibold leading-tight text-gray-800">Messages</h2>
+                <PrimaryButton :href="route('admin.sermons.create')">New message</PrimaryButton>
             </div>
         </template>
 
@@ -74,7 +74,7 @@ const flash = computed(() => page.props.success);
                                         method="delete"
                                         as="button"
                                         class="ms-4 text-red-600 hover:underline"
-                                        @click="(e) => !confirm('Remove this sermon?') && e.preventDefault()"
+                                        @click="(e) => !confirm('Remove this message?') && e.preventDefault()"
                                     >
                                         Delete
                                     </Link>
@@ -84,7 +84,7 @@ const flash = computed(() => page.props.success);
                     </table>
                 </div>
                 <p v-else class="rounded-sm bg-white p-8 text-center text-gray-600 shadow-sm">
-                    No sermons yet. Create one to show it on the Media page.
+                    No messages yet. Create one to show it on the Media page.
                 </p>
             </div>
         </div>

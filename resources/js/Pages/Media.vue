@@ -51,7 +51,7 @@ function playFeaturedVideo() {
 
         <HeroSection
             :image-src="media.hero"
-            eyebrow="Sermons at New Life Bible Church"
+            eyebrow="Messages at New Life Bible Church"
             title="Biblical Teaching for Everyday Life"
             subtitle="We teach Scripture with clarity and conviction—so you can know Jesus and follow Him in the rhythms of daily life."
         >
@@ -77,7 +77,7 @@ function playFeaturedVideo() {
                                 <button
                                     type="button"
                                     class="absolute inset-0 flex items-center justify-center bg-black/35 transition hover:bg-black/45 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-                                    aria-label="Play latest sermon video"
+                                    aria-label="Play latest message video"
                                     @click="playFeaturedVideo"
                                 >
                                     <span
@@ -91,7 +91,7 @@ function playFeaturedVideo() {
                                 v-else
                                 :src="playbackEmbedSrc"
                                 class="absolute inset-0 h-full w-full"
-                                title="Latest sermon video"
+                                title="Latest message video"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 allowfullscreen
                             />
@@ -104,7 +104,7 @@ function playFeaturedVideo() {
                         <h2 class="text-2xl font-bold text-primary md:text-3xl">{{ featured.title }}</h2>
                         <p class="mt-4 text-slate-600">{{ featured.description }}</p>
                         <div v-if="featured.slug" class="mt-8">
-                            <PrimaryButton :href="route('media.show', featured.slug)">Watch Latest Sermon</PrimaryButton>
+                            <PrimaryButton :href="route('media.show', featured.slug)">Watch Latest Message</PrimaryButton>
                         </div>
                     </div>
                 </div>
@@ -118,7 +118,7 @@ function playFeaturedVideo() {
                         v-for="item in sermons"
                         :key="item.slug"
                         :href="route('media.show', item.slug)"
-                        :aria-label="`Open sermon: ${item.title}`"
+                        :aria-label="`Open message: ${item.title}`"
                         class="group block overflow-hidden border border-neutral-tan/50 bg-white shadow-sm transition hover:border-accent/40 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
                     >
                         <article class="h-full">
@@ -149,7 +149,7 @@ function playFeaturedVideo() {
                         </article>
                     </Link>
                 </div>
-                <p v-else class="text-center text-slate-600">More sermons will be listed here when they are published.</p>
+                <p v-else class="text-center text-slate-600">More messages will be listed here when they are published.</p>
             </SectionContainer>
         </section>
 

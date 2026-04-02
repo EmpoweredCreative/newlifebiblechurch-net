@@ -24,8 +24,8 @@ class SermonController extends Controller
                 'posterUrl' => VideoEmbed::posterUrl($latest->video_url),
             ]
             : [
-                'title' => 'Latest Sermon',
-                'description' => 'Biblical teaching for everyday life. New sermons will appear here when published.',
+                'title' => 'Latest Message',
+                'description' => 'Biblical teaching for everyday life. New messages will appear here when published.',
                 'slug' => null,
                 'embedUrl' => null,
                 'posterUrl' => null,
