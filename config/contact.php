@@ -8,7 +8,8 @@ return [
     |--------------------------------------------------------------------------
     |
     | Separate from registration approval (see config/registration.php).
-    | CONTACT_FORM_TO is preferred; MAIL_CONTACT_TO is supported for backward compatibility.
+    | CONTACT_FORM_TO is preferred; MAIL_CONTACT_TO and SENDGRID_TO_EMAIL are fallbacks (same env as
+    | config('services.sendgrid.to_email')). Optional recipient display name: SENDGRID_TO_NAME.
     |
     */
 
@@ -16,7 +17,9 @@ return [
         ? (string) env('CONTACT_FORM_TO')
         : (filled(env('MAIL_CONTACT_TO'))
             ? (string) env('MAIL_CONTACT_TO')
-            : 'contact@newlifebiblechurch.net'),
+            : (filled(env('SENDGRID_TO_EMAIL'))
+                ? (string) env('SENDGRID_TO_EMAIL')
+                : 'contact@newlifebiblechurch.net')),
 
     /*
     |--------------------------------------------------------------------------

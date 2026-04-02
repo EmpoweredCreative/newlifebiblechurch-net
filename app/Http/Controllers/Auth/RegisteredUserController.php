@@ -42,16 +42,22 @@ class RegisteredUserController extends Controller
 
         $approverEmail = (string) config('registration.approver_email');
 
-        try {
-            Mail::to($approverEmail)->send(new PendingRegistrationMail($user, $approveUrl, $rejectUrl));
-        } catch (Throwable $e) {
-            report($e);
-            $user->delete();
+        $userId = $user->id;
 
-            return redirect()->back()
-                ->withInput($request->except('password', 'password_confirmation', 'website'))
-                ->with('error', 'We could not complete registration right now. Please try again in a few minutes or contact the church office.');
-        }
+        dispatch(function () use ($userId, $approveUrl, $rejectUrl, $approverEmail): void {
+            $pendingUser = User::query()->find($userId);
+            if ($pendingUser === null) {
+                return;
+            }
+
+            try {
+                Mail::to($approverEmail)->send(
+                    new PendingRegistrationMail($pendingUser, $approveUrl, $rejectUrl),
+                );
+            } catch (Throwable $e) {
+                report($e);
+            }
+        })->afterResponse();
 
         return redirect()->route('login')->with(
             'status',

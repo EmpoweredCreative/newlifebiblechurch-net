@@ -7,6 +7,7 @@ use App\Mail\RegistrationApprovedMail;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View as ViewResponse;
+use Throwable;
 
 class ApproveRegistrationController extends Controller
 {
@@ -27,7 +28,20 @@ class ApproveRegistrationController extends Controller
         $user->forceFill(['approved_at' => now()])->save();
 
         $loginUrl = route('login');
-        Mail::to($user->email)->send(new RegistrationApprovedMail($loginUrl));
+        $userId = $user->id;
+
+        dispatch(function () use ($userId, $loginUrl): void {
+            $approvedUser = User::query()->find($userId);
+            if ($approvedUser === null) {
+                return;
+            }
+
+            try {
+                Mail::to($approvedUser->email)->send(new RegistrationApprovedMail($loginUrl));
+            } catch (Throwable $e) {
+                report($e);
+            }
+        })->afterResponse();
 
         return view('auth.registration-action-result', [
             'title' => 'Registration approved',

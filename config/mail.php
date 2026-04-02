@@ -48,7 +48,7 @@ return [
             'port' => (int) env('SENDGRID_SMTP_PORT', 587),
             'username' => env('SENDGRID_SMTP_USERNAME', 'apikey'),
             'password' => env('SENDGRID_API_KEY'),
-            'timeout' => null,
+            'timeout' => (int) env('MAIL_SMTP_TIMEOUT', 15),
             'local_domain' => env('MAIL_EHLO_DOMAIN', parse_url((string) env('APP_URL', 'http://localhost'), PHP_URL_HOST)),
         ],
 
@@ -60,7 +60,7 @@ return [
             'port' => env('MAIL_PORT', 2525),
             'username' => env('MAIL_USERNAME'),
             'password' => env('MAIL_PASSWORD'),
-            'timeout' => null,
+            'timeout' => (int) env('MAIL_SMTP_TIMEOUT', 15),
             'local_domain' => env('MAIL_EHLO_DOMAIN', parse_url((string) env('APP_URL', 'http://localhost'), PHP_URL_HOST)),
         ],
 
@@ -126,8 +126,13 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', env('APP_NAME', 'Laravel')),
+        // MAIL_* is standard Laravel; SENDGRID_FROM_* matches common site-specific .env naming.
+        'address' => filled(env('MAIL_FROM_ADDRESS'))
+            ? (string) env('MAIL_FROM_ADDRESS')
+            : (string) env('SENDGRID_FROM_EMAIL', 'hello@example.com'),
+        'name' => filled(env('MAIL_FROM_NAME'))
+            ? (string) env('MAIL_FROM_NAME')
+            : (string) env('SENDGRID_FROM_NAME', env('APP_NAME', 'Laravel')),
     ],
 
 ];

@@ -37,6 +37,12 @@ return [
 
     'sendgrid' => [
         'api_key' => env('SENDGRID_API_KEY'),
+        // Verified sender for SendGrid: prefer SENDGRID_FROM_*; MAIL_* is fallback for the same values.
+        'from_email' => env('SENDGRID_FROM_EMAIL') ?: env('MAIL_FROM_ADDRESS'),
+        'from_name' => env('SENDGRID_FROM_NAME') ?: env('MAIL_FROM_NAME') ?: env('APP_NAME', 'Laravel'),
+        // Contact form staff inbox only (see config/contact.php for delivery address resolution).
+        'to_email' => env('SENDGRID_TO_EMAIL'),
+        'to_name' => env('SENDGRID_TO_NAME'),
     ],
 
 ];

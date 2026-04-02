@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ContactRequest;
 use App\Mail\ContactMessageMail;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Support\Facades\Mail;
 use Throwable;
 
@@ -15,7 +16,11 @@ class ContactController extends Controller
         $data = $request->contactPayload();
 
         try {
-            Mail::to(config('contact.to'))->send(new ContactMessageMail($data));
+            $toEmail = (string) config('contact.to');
+            $toName = config('services.sendgrid.to_name');
+            $recipient = filled($toName) ? new Address($toEmail, (string) $toName) : $toEmail;
+
+            Mail::to($recipient)->send(new ContactMessageMail($data));
         } catch (Throwable $e) {
             report($e);
 
