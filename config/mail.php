@@ -37,6 +37,21 @@ return [
 
     'mailers' => [
 
+        /*
+        | SendGrid via SMTP (same setup as most Laravel apps: username "apikey", password = API key).
+        | Set SENDGRID_API_KEY and either MAIL_MAILER=sendgrid or rely on AppServiceProvider to switch
+        | away from log/array when the key is present (not in testing).
+        */
+        'sendgrid' => [
+            'transport' => 'smtp',
+            'host' => env('SENDGRID_SMTP_HOST', 'smtp.sendgrid.net'),
+            'port' => (int) env('SENDGRID_SMTP_PORT', 587),
+            'username' => env('SENDGRID_SMTP_USERNAME', 'apikey'),
+            'password' => env('SENDGRID_API_KEY'),
+            'timeout' => null,
+            'local_domain' => env('MAIL_EHLO_DOMAIN', parse_url((string) env('APP_URL', 'http://localhost'), PHP_URL_HOST)),
+        ],
+
         'smtp' => [
             'transport' => 'smtp',
             'scheme' => env('MAIL_SCHEME'),
@@ -114,7 +129,5 @@ return [
         'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
         'name' => env('MAIL_FROM_NAME', env('APP_NAME', 'Laravel')),
     ],
-
-    'contact_to' => env('MAIL_CONTACT_TO', 'contact@newlifebiblechurch.net'),
 
 ];

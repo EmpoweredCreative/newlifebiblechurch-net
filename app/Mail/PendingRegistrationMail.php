@@ -5,6 +5,7 @@ namespace App\Mail;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -23,6 +24,9 @@ class PendingRegistrationMail extends Mailable
     {
         return new Envelope(
             subject: 'New account registration pending approval — '.$this->user->email,
+            replyTo: [
+                new Address($this->user->email, $this->user->name),
+            ],
         );
     }
 

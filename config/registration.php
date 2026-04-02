@@ -2,6 +2,16 @@
 
 return [
 
+    /*
+    |--------------------------------------------------------------------------
+    | Registration — moderator approval (not the public contact form)
+    |--------------------------------------------------------------------------
+    |
+    | Pending signups notify this address with approve/decline links.
+    | Use CONTACT_FORM_TO (or MAIL_CONTACT_TO) for website contact inquiries.
+    |
+    */
+
     'approver_email' => env('REGISTRATION_APPROVER_EMAIL', 'danny@empoweredcreative.co'),
 
     /** Signed approve/reject links expire after this many minutes (default 14 days). */

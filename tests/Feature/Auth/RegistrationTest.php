@@ -53,6 +53,26 @@ class RegistrationTest extends TestCase
         });
     }
 
+    public function test_registration_notifies_approver_when_sendgrid_key_is_set(): void
+    {
+        Mail::fake();
+        config(['services.sendgrid.api_key' => 'sg.test-key']);
+
+        $response = $this->post('/register', $this->validRegistrationPayload());
+
+        $response->assertRedirect(route('login', absolute: false));
+
+        $this->assertDatabaseHas('users', [
+            'email' => 'jane@example.com',
+            'approved_at' => null,
+        ]);
+
+        Mail::assertSent(PendingRegistrationMail::class, function (PendingRegistrationMail $mail): bool {
+            return $mail->hasTo(config('registration.approver_email'))
+                && $mail->user->email === 'jane@example.com';
+        });
+    }
+
     public function test_registration_rejects_honeypot_field(): void
     {
         Mail::fake();

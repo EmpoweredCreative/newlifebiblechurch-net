@@ -6,11 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Mail\RegistrationApprovedMail;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\View\View;
+use Illuminate\View\View as ViewResponse;
 
 class ApproveRegistrationController extends Controller
 {
-    public function __invoke(User $user): View
+    public function __invoke(User $user): ViewResponse
     {
         if ($user->is_admin) {
             abort(403);

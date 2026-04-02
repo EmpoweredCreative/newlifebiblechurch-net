@@ -4,6 +4,22 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Contact form — where submissions are delivered
+    |--------------------------------------------------------------------------
+    |
+    | Separate from registration approval (see config/registration.php).
+    | CONTACT_FORM_TO is preferred; MAIL_CONTACT_TO is supported for backward compatibility.
+    |
+    */
+
+    'to' => filled(env('CONTACT_FORM_TO'))
+        ? (string) env('CONTACT_FORM_TO')
+        : (filled(env('MAIL_CONTACT_TO'))
+            ? (string) env('MAIL_CONTACT_TO')
+            : 'contact@newlifebiblechurch.net'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Contact form anti-spam
     |--------------------------------------------------------------------------
     */
