@@ -55,7 +55,7 @@ import { route } from 'ziggy-js';
                     </div>
                     <div>
                         <h3 class="text-sm font-semibold uppercase tracking-wider text-neutral-tan">Youth Ministry</h3>
-                        <p class="mt-3 text-lg">6th – 12th grade — Wed evenings</p>
+                        <p class="mt-3 text-lg">6th – 12th grade — Sunday evenings</p>
                     </div>
                 </div>
             </SectionContainer>
