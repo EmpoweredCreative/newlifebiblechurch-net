@@ -169,4 +169,16 @@ class RegistrationTest extends TestCase
 
         $response->assertForbidden();
     }
+
+    public function test_pending_registration_mail_renders_signed_urls_with_raw_ampersands(): void
+    {
+        $user = User::factory()->pendingApproval()->create();
+        $approveUrl = URL::temporarySignedRoute('registration.approve', now()->addHour(), ['user' => $user]);
+        $rejectUrl = URL::temporarySignedRoute('registration.reject', now()->addHour(), ['user' => $user]);
+
+        $rendered = (new PendingRegistrationMail($user, $approveUrl, $rejectUrl))->render();
+
+        $this->assertStringContainsString('&signature=', $rendered);
+        $this->assertStringNotContainsString('&amp;signature=', $rendered);
+    }
 }

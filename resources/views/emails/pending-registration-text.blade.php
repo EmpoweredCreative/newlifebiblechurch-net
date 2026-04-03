@@ -5,9 +5,9 @@ Email: {{ $user->email }}
 Requested at: {{ $user->created_at?->timezone(config('app.timezone'))->toDateTimeString() }}
 
 Approve this registration (signed link; expires automatically):
-{{ $approveUrl }}
+{!! $approveUrl !!}
 
 Decline and remove this pending account:
-{{ $rejectUrl }}
+{!! $rejectUrl !!}
 
 If you did not expect this message, you can ignore it or use Decline to delete the pending registration.
