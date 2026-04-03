@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $title }} — {{ config('app.name') }}</title>
+    @include('partials.favicon')
 </head>
 <body style="font-family: system-ui, sans-serif; line-height: 1.5; padding: 2rem; max-width: 36rem; margin: 0 auto; color: #1e293b;">
     <h1 style="font-size: 1.25rem; font-weight: 600;">{{ $title }}</h1>
