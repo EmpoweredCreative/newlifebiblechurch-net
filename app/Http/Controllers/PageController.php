@@ -50,14 +50,14 @@ class PageController extends Controller
     public function privacy(): Response
     {
         return Inertia::render('Legal/PrivacyPolicy', [
-            'embedUrl' => (string) (config('legal.privacy_embed_url') ?? ''),
+            'embedId' => (string) (config('legal.privacy_embed_id') ?? ''),
         ]);
     }
 
     public function terms(): Response
     {
         return Inertia::render('Legal/Terms', [
-            'embedUrl' => (string) (config('legal.terms_embed_url') ?? ''),
+            'embedId' => (string) (config('legal.terms_embed_id') ?? ''),
         ]);
     }
 }

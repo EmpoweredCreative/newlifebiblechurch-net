@@ -19,13 +19,14 @@ class RegistrationApprovedMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Your New Life Bible Church account was approved',
+            subject: 'Your New Life Bible Church account is active',
         );
     }
 
     public function content(): Content
     {
         return new Content(
+            html: 'emails.registration-approved-html',
             text: 'emails.registration-approved-text',
         );
     }

@@ -10,13 +10,14 @@ import { computed, onMounted } from 'vue';
 const page = usePage();
 const errorMessage = computed(() => page.props.error);
 
+// Set immediately in setup (not only in onMounted) so form_started_at is never 0, which fails Laravel's min:1 rule.
 const form = useForm({
     name: '',
     email: '',
     password: '',
     password_confirmation: '',
     website: '',
-    form_started_at: 0,
+    form_started_at: Date.now(),
 });
 
 onMounted(() => {

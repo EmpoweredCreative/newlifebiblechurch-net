@@ -137,7 +137,13 @@ class RegistrationTest extends TestCase
         $this->assertNotNull($user->approved_at);
 
         Mail::assertSent(RegistrationApprovedMail::class, function (RegistrationApprovedMail $mail): bool {
-            return $mail->hasTo('pending@example.com');
+            if (! $mail->hasTo('pending@example.com')) {
+                return false;
+            }
+            $rendered = $mail->render();
+
+            return str_contains($rendered, 'Sign in')
+                && str_contains($rendered, route('login'));
         });
     }
 

@@ -1,10 +1,11 @@
 <script setup>
 import PublicLayout from '@/Layouts/PublicLayout.vue';
 import SectionContainer from '@/Components/SectionContainer.vue';
+import TermageddonEmbed from '@/Components/TermageddonEmbed.vue';
 import { Head } from '@inertiajs/vue3';
 
 defineProps({
-    embedUrl: { type: String, default: '' },
+    embedId: { type: String, default: '' },
 });
 </script>
 
@@ -16,21 +17,19 @@ defineProps({
             <SectionContainer wrapper-class="!py-0">
                 <h1 class="text-3xl font-bold text-primary">Privacy Policy</h1>
                 <p class="mt-2 text-sm text-slate-600">
-                    Policies are provided by Termageddon. Add <code class="rounded bg-surface-cream px-1">TERMAGEDDON_PRIVACY_EMBED_URL</code> to your
-                    <code class="rounded bg-surface-cream px-1">.env</code> to display the live embed.
+                    Policy content is provided by Termageddon. Set
+                    <code class="rounded bg-surface-cream px-1">TERMAGEDDON_PRIVACY_EMBED_ID</code> in your
+                    <code class="rounded bg-surface-cream px-1">.env</code> to load the live policy.
                 </p>
             </SectionContainer>
         </div>
 
         <div class="min-h-[50vh] bg-surface-cream py-8">
-            <iframe
-                v-if="embedUrl"
-                :src="embedUrl"
-                title="Privacy Policy"
-                class="h-[min(80vh,1200px)] w-full border-0"
-            />
+            <SectionContainer v-if="embedId" wrapper-class="!py-0">
+                <TermageddonEmbed :policy-id="embedId" />
+            </SectionContainer>
             <SectionContainer v-else wrapper-class="text-center text-slate-600">
-                <p>Embed URL not configured.</p>
+                <p>Termageddon embed ID not configured.</p>
             </SectionContainer>
         </div>
     </PublicLayout>

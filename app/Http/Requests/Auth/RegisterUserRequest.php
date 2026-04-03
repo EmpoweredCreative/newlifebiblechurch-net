@@ -33,6 +33,7 @@ class RegisterUserRequest extends FormRequest
         return [
             'website.max' => 'Unable to submit this form.',
             'form_started_at.required' => 'Please refresh the page and try again.',
+            'email.unique' => 'This email already has a pending or existing account. Try signing in, or contact the church office if you need help.',
         ];
     }
 
