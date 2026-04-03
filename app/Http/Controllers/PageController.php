@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -47,17 +48,13 @@ class PageController extends Controller
         return Inertia::render('Ministries/AdultGroups');
     }
 
-    public function privacy(): Response
+    public function privacy(): View
     {
-        return Inertia::render('Legal/PrivacyPolicy', [
-            'embedId' => (string) (config('legal.privacy_embed_id') ?? ''),
-        ]);
+        return view('legal.privacy');
     }
 
-    public function terms(): Response
+    public function terms(): View
     {
-        return Inertia::render('Legal/Terms', [
-            'embedId' => (string) (config('legal.terms_embed_id') ?? ''),
-        ]);
+        return view('legal.terms');
     }
 }

@@ -91,10 +91,11 @@ const givingUrl = 'https://newlifebible.churchcenter.com/giving/to/general';
                     <h3 class="mb-4 text-xs font-semibold uppercase tracking-wider text-primary">Legal</h3>
                     <ul class="space-y-2 text-sm">
                         <li>
-                            <Link :href="route('privacy-policy')" class="text-slate-700 hover:text-accent">Privacy Policy</Link>
+                            <!-- Full page load: legal pages are Blade + Termageddon (window "load"). -->
+                            <a :href="route('privacy-policy')" class="text-slate-700 hover:text-accent">Privacy Policy</a>
                         </li>
                         <li>
-                            <Link :href="route('terms')" class="text-slate-700 hover:text-accent">Terms &amp; Conditions</Link>
+                            <a :href="route('terms')" class="text-slate-700 hover:text-accent">Terms &amp; Conditions</a>
                         </li>
                     </ul>
                 </div>
