@@ -3,9 +3,14 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
+use InvalidArgumentException;
 use SendGrid;
+use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Component\Mailer\Bridge\Sendgrid\Transport\SendgridTransportFactory;
+use Symfony\Component\Mailer\Transport\Dsn;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,6 +34,23 @@ class AppServiceProvider extends ServiceProvider
         Vite::prefetch(concurrency: 3);
 
         /*
+         * SendGrid Web API (HTTPS :443). Many hosts (including Laravel Forge) block outbound SMTP to smtp.sendgrid.net:587,
+         * which causes connection timeouts; the API transport avoids SMTP entirely.
+         */
+        Mail::extend('sendgrid-api', function (array $config) {
+            $key = $config['key'] ?? config('services.sendgrid.api_key');
+            if (! filled($key)) {
+                throw new InvalidArgumentException(
+                    'SendGrid API mailer requires SENDGRID_API_KEY (or mail.mailers.sendgrid.key).',
+                );
+            }
+
+            $factory = new SendgridTransportFactory(null, HttpClient::create());
+
+            return $factory->create(new Dsn('sendgrid+api', 'default', (string) $key));
+        });
+
+        /*
          * Align mail.from with config('services.sendgrid') when Laravel's global From is not explicitly set via MAIL_*.
          * mail.php is loaded before services.php, so this runs after both are merged. MAIL_* still wins when set.
          */
@@ -41,7 +63,7 @@ class AppServiceProvider extends ServiceProvider
 
         /*
          * SendGrid: if the API key is set but MAIL_MAILER is still log or array (e.g. copied .env.example),
-         * use the sendgrid SMTP mailer so Mail:: actually delivers — same pattern as typical Laravel + Forge sites.
+         * use the sendgrid mailer (Web API) so Mail:: actually delivers.
          */
         if (! app()->environment('testing')
             && filled(config('services.sendgrid.api_key'))

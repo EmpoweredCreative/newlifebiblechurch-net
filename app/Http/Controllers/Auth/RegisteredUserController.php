@@ -42,22 +42,13 @@ class RegisteredUserController extends Controller
 
         $approverEmail = (string) config('registration.approver_email');
 
-        $userId = $user->id;
-
-        dispatch(function () use ($userId, $approveUrl, $rejectUrl, $approverEmail): void {
-            $pendingUser = User::query()->find($userId);
-            if ($pendingUser === null) {
-                return;
-            }
-
-            try {
-                Mail::to($approverEmail)->send(
-                    new PendingRegistrationMail($pendingUser, $approveUrl, $rejectUrl),
-                );
-            } catch (Throwable $e) {
-                report($e);
-            }
-        })->afterResponse();
+        try {
+            Mail::to($approverEmail)->send(
+                new PendingRegistrationMail($user, $approveUrl, $rejectUrl),
+            );
+        } catch (Throwable $e) {
+            report($e);
+        }
 
         return redirect()->route('login')->with(
             'status',

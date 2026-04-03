@@ -38,11 +38,19 @@ return [
     'mailers' => [
 
         /*
-        | SendGrid via SMTP (same setup as most Laravel apps: username "apikey", password = API key).
+        | SendGrid via HTTPS Web API (symfony/sendgrid-mailer). Preferred on Forge and other hosts that block SMTP :587.
         | Set SENDGRID_API_KEY and either MAIL_MAILER=sendgrid or rely on AppServiceProvider to switch
         | away from log/array when the key is present (not in testing).
         */
         'sendgrid' => [
+            'transport' => 'sendgrid-api',
+            'key' => env('SENDGRID_API_KEY'),
+        ],
+
+        /*
+        | Optional: SendGrid over SMTP if your network allows it (e.g. local). Use MAIL_MAILER=sendgrid-smtp.
+        */
+        'sendgrid-smtp' => [
             'transport' => 'smtp',
             'host' => env('SENDGRID_SMTP_HOST', 'smtp.sendgrid.net'),
             'port' => (int) env('SENDGRID_SMTP_PORT', 587),

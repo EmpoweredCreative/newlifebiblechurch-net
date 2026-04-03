@@ -28,20 +28,12 @@ class ApproveRegistrationController extends Controller
         $user->forceFill(['approved_at' => now()])->save();
 
         $loginUrl = route('login');
-        $userId = $user->id;
 
-        dispatch(function () use ($userId, $loginUrl): void {
-            $approvedUser = User::query()->find($userId);
-            if ($approvedUser === null) {
-                return;
-            }
-
-            try {
-                Mail::to($approvedUser->email)->send(new RegistrationApprovedMail($loginUrl));
-            } catch (Throwable $e) {
-                report($e);
-            }
-        })->afterResponse();
+        try {
+            Mail::to($user->email)->send(new RegistrationApprovedMail($loginUrl));
+        } catch (Throwable $e) {
+            report($e);
+        }
 
         return view('auth.registration-action-result', [
             'title' => 'Registration approved',
