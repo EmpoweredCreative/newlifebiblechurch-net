@@ -16,7 +16,7 @@ import { route } from 'ziggy-js';
         <HeroSection
             :image-src="home.hero"
             eyebrow="New Life Bible Church in York, PA"
-            title="Experience life in Jesus. Live new."
+            :title="'Experience life in Jesus.\nLive new.'"
             subtitle="Come as you are and be welcomed into a community where you can be fully known, fully loved, and experience real change through Jesus."
         >
             <PrimaryButton :href="route('start-here')">Plan a Visit</PrimaryButton>

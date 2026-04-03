@@ -23,7 +23,7 @@ defineProps({
                 {{ eyebrow }}
             </p>
             <h1
-                class="animate-fade-up stagger-1 max-w-4xl text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl"
+                class="animate-fade-up stagger-1 max-w-4xl whitespace-pre-line text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl"
             >
                 {{ title }}
             </h1>
