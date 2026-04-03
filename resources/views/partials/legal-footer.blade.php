@@ -67,7 +67,14 @@
             </div>
         </div>
         <div class="mt-12 flex flex-col items-end gap-2 border-t border-neutral-tan/50 pt-8 text-right text-xs text-slate-500">
-            <p>Powered by Empowered Creative</p>
+            <p>
+                <a
+                    href="https://www.empoweredcreative.co"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-slate-700 hover:text-accent"
+                >Powered by Empowered Creative</a>
+            </p>
             <p>&copy; {{ $year }} New Life Bible Church. All rights reserved.</p>
         </div>
     </div>
