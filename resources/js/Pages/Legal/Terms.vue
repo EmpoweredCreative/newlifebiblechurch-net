@@ -16,11 +16,6 @@ defineProps({
         <div class="border-b border-neutral-tan/60 bg-white py-10">
             <SectionContainer wrapper-class="!py-0">
                 <h1 class="text-3xl font-bold text-primary">Terms &amp; Conditions</h1>
-                <p class="mt-2 text-sm text-slate-600">
-                    Terms are provided by Termageddon. Set
-                    <code class="rounded bg-surface-cream px-1">TERMAGEDDON_TERMS_EMBED_ID</code> in your
-                    <code class="rounded bg-surface-cream px-1">.env</code> to load the live terms.
-                </p>
             </SectionContainer>
         </div>
 
@@ -29,7 +24,10 @@ defineProps({
                 <TermageddonEmbed :policy-id="embedId" />
             </SectionContainer>
             <SectionContainer v-else wrapper-class="text-center text-slate-600">
-                <p>Termageddon embed ID not configured.</p>
+                <p>
+                    The terms and conditions are not available online at the moment. Please contact the church
+                    office if you need a copy.
+                </p>
             </SectionContainer>
         </div>
     </PublicLayout>
