@@ -3,6 +3,8 @@ defineProps({
     imageSrc: { type: String, required: true },
     eyebrow: { type: String, default: '' },
     title: { type: String, required: true },
+    /** Optional short line directly under the main title (e.g. audience or tagline). */
+    lead: { type: String, default: '' },
     subtitle: { type: String, default: '' },
     align: { type: String, default: 'center' },
 });
@@ -28,12 +30,18 @@ defineProps({
                 {{ title }}
             </h1>
             <p
+                v-if="lead"
+                class="animate-fade-up stagger-2 mt-5 max-w-2xl text-xl font-medium text-white md:text-2xl"
+            >
+                {{ lead }}
+            </p>
+            <p
                 v-if="subtitle"
-                class="animate-fade-up stagger-2 mt-6 max-w-2xl text-lg text-white/90 md:text-xl"
+                class="animate-fade-up stagger-3 mt-6 max-w-2xl text-lg text-white/90 md:text-xl"
             >
                 {{ subtitle }}
             </p>
-            <div v-if="$slots.default" class="animate-fade-up stagger-3 mt-10 flex flex-wrap items-center justify-center gap-4">
+            <div v-if="$slots.default" class="animate-fade-up stagger-4 mt-10 flex flex-wrap items-center justify-center gap-4">
                 <slot />
             </div>
         </div>

@@ -7,6 +7,8 @@ import { youthMinistry } from '@/siteImages';
 import { Head } from '@inertiajs/vue3';
 import { route } from 'ziggy-js';
 
+const connectFormUrl = `${route('connect')}#contact`;
+
 const cards = [
     'Community and belonging',
     'Clear biblical teaching',
@@ -23,14 +25,15 @@ const cards = [
             :image-src="youthMinistry.hero"
             eyebrow="Youth Ministry"
             title="A Place for Students to Grow in Faith and Friendship"
-            subtitle="Our Youth Ministry helps middle school students build real relationships, explore their faith, and grow in their understanding of who Jesus is."
+            lead="Middle and High School Students"
+            subtitle="Our Youth Ministry helps students build real relationships, explore their faith, and grow in their understanding of who Jesus is."
         />
 
         <section class="bg-white py-16">
             <SectionContainer>
                 <div class="grid items-center gap-12 lg:grid-cols-2">
                     <div>
-                        <h2 class="text-3xl font-bold text-primary md:text-4xl">Youth at New Life</h2>
+                        <h2 class="text-3xl font-bold text-primary md:text-4xl">New Life Youth</h2>
                         <p class="mt-6 leading-relaxed text-slate-700">
                             A place for 6th–12th grade students.
                         </p>
@@ -67,7 +70,7 @@ const cards = [
                         </p>
                         <p class="mt-6 text-slate-700">Have questions about Youth Ministry?</p>
                         <div class="mt-4">
-                            <PrimaryButton :href="route('connect')">Contact Us</PrimaryButton>
+                            <PrimaryButton :href="connectFormUrl">Contact Us</PrimaryButton>
                         </div>
                     </div>
                 </div>
@@ -109,9 +112,6 @@ const cards = [
                     Our Youth Ministry is committed to helping students build strong friendships, explore their faith,
                     and grow in confidence in who they are in Christ.
                 </p>
-                <div class="mt-10">
-                    <PrimaryButton :href="route('start-here')">Plan a Visit</PrimaryButton>
-                </div>
             </SectionContainer>
         </section>
     </PublicLayout>

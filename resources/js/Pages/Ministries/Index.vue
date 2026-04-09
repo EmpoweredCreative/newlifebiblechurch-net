@@ -48,7 +48,7 @@ const cards = [
                 :image-src="ministries.hero"
                 eyebrow="Ministries at New Life Bible Church"
                 title="A Place to Grow at Every Stage of Life"
-                subtitle="At New Life Bible Church, our ministries are designed to help people of all ages experience life in Jesus and grow in community."
+                subtitle="At New Life Bible Church, our ministries are designed to help people of all ages experience life in Jesus and live new."
             />
 
             <section class="bg-white py-16">
@@ -110,29 +110,7 @@ const cards = [
                         part of what God is doing in our church and community.
                     </p>
                     <div class="mt-10">
-                        <PrimaryButton :href="route('connect')">Contact Us</PrimaryButton>
-                    </div>
-                </SectionContainer>
-            </section>
-
-            <section class="relative min-h-[380px] py-28 md:min-h-[420px] md:py-32">
-                <img
-                    :src="ministries.youBelong"
-                    alt=""
-                    class="absolute inset-0 h-full w-full object-cover"
-                />
-                <div class="absolute inset-0 bg-black/50" aria-hidden="true" />
-                <div
-                    class="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/82 to-navy-950/92 nl-grain"
-                    aria-hidden="true"
-                />
-                <SectionContainer wrapper-class="relative z-10 text-center text-white">
-                    <h2 class="text-3xl font-bold md:text-4xl">You Belong</h2>
-                    <p class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/92 md:text-xl">
-                        No matter your age or stage of life, there is a place for you at New Life Bible Church.
-                    </p>
-                    <div class="mt-12">
-                        <PrimaryButton :href="route('start-here')">Plan a Visit</PrimaryButton>
+                        <PrimaryButton :href="`${route('connect')}#contact`">Contact Us</PrimaryButton>
                     </div>
                 </SectionContainer>
             </section>

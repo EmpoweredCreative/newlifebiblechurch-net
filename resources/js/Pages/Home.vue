@@ -20,7 +20,7 @@ import { route } from 'ziggy-js';
             subtitle="Come as you are and be welcomed into a community where you can be fully known, fully loved, and experience real change through Jesus."
         >
             <PrimaryButton :href="route('start-here')">Plan a Visit</PrimaryButton>
-            <OutlineButton :href="route('media')">Watch Online</OutlineButton>
+            <OutlineButton href="https://www.youtube.com/@NewLifeBibleChurchPA">Watch Online</OutlineButton>
         </HeroSection>
 
         <section class="bg-white py-20">

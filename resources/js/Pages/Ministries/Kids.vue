@@ -4,8 +4,16 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import PublicLayout from '@/Layouts/PublicLayout.vue';
 import SectionContainer from '@/Components/SectionContainer.vue';
 import { kidsMinistry } from '@/siteImages';
-import { Head, Link } from '@inertiajs/vue3';
+import { Head } from '@inertiajs/vue3';
 import { route } from 'ziggy-js';
+import { ref } from 'vue';
+
+/** Drop in a registration URL when camp signup is live. */
+const cbcJrCampRegistrationUrl = '';
+
+const connectFormUrl = `${route('connect')}#contact`;
+
+const campPromoFailed = ref(false);
 
 const cards = [
     'Clear Teaching from the Bible',
@@ -70,7 +78,53 @@ const cards = [
                         </ul>
                         <p class="mt-6 text-slate-700">Have questions about kids ministry?</p>
                         <div class="mt-4">
-                            <PrimaryButton :href="route('connect')">Contact Our Team</PrimaryButton>
+                            <PrimaryButton :href="connectFormUrl">Contact Our Team</PrimaryButton>
+                        </div>
+                    </div>
+                </div>
+            </SectionContainer>
+        </section>
+
+        <section class="bg-white py-16">
+            <SectionContainer>
+                <div class="mx-auto max-w-3xl text-center">
+                    <h2 class="text-3xl font-bold text-primary md:text-4xl">Safety You Can Trust</h2>
+                    <p class="mt-6 leading-relaxed text-slate-700 md:text-lg">
+                        Every Kids Ministry volunteer serves with required Pennsylvania clearances. We use a secure check-in
+                        system for children and volunteers so families can worship with confidence while kids are cared for
+                        safely.
+                    </p>
+                </div>
+            </SectionContainer>
+        </section>
+
+        <section class="bg-surface-light py-16">
+            <SectionContainer>
+                <div class="grid items-center gap-12 lg:grid-cols-2">
+                    <div class="overflow-hidden rounded-sm shadow-lg">
+                        <img
+                            :src="campPromoFailed ? kidsMinistry.intro : kidsMinistry.cbcJrCampPromo"
+                            alt="CBC Jr. Camp promotional graphic"
+                            class="h-full w-full object-cover"
+                            @error="campPromoFailed = true"
+                        />
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold text-primary md:text-4xl">CBC Jr. Camp</h2>
+                        <p class="mt-2 text-lg font-semibold text-primary">Sunday, July 5 – Friday, July 10, 2026</p>
+                        <p class="mt-4 text-slate-700">Summit Grove Camp in New Freedom, PA</p>
+                        <p class="mt-4 leading-relaxed text-slate-700">
+                            A summer camp experience for kids—details and registration will be posted here when available.
+                        </p>
+                        <div v-if="cbcJrCampRegistrationUrl" class="mt-6">
+                            <a
+                                :href="cbcJrCampRegistrationUrl"
+                                class="inline-flex items-center justify-center rounded-sm bg-accent px-6 py-3 text-xs font-bold uppercase tracking-wider text-white shadow-sm transition hover:bg-accent/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                                rel="noopener noreferrer"
+                                target="_blank"
+                            >
+                                Register for Camp
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -112,9 +166,6 @@ const cards = [
                     We would love to welcome your family and help your child experience life in Jesus in a safe, joyful
                     environment.
                 </p>
-                <div class="mt-10">
-                    <PrimaryButton :href="route('start-here')">Plan a Visit</PrimaryButton>
-                </div>
             </SectionContainer>
         </section>
     </PublicLayout>

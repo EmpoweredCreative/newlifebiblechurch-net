@@ -38,12 +38,14 @@ const faqs = [
             title="New Here? Start Here."
             subtitle="Whether you're visiting church for the first time, coming back after a break, or just exploring, you're welcome at New Life Bible Church."
         >
-            <Link
-                :href="route('connect')"
+            <a
+                href="https://newlifebible.churchcenter.com/people/forms/1193521"
+                target="_blank"
+                rel="noopener noreferrer"
                 class="inline-flex items-center justify-center border border-transparent bg-neutral-tan px-6 py-3 text-xs font-semibold uppercase tracking-wider text-primary shadow-sm transition hover:bg-[#c9b5a4] focus:outline-none focus:ring-2 focus:ring-neutral-tan focus:ring-offset-2 focus:ring-offset-primary"
             >
                 Get Connected
-            </Link>
+            </a>
             <Link
                 href="#join-sunday"
                 class="inline-flex items-center justify-center border-2 border-white bg-transparent px-6 py-3 text-xs font-semibold uppercase tracking-wider text-white transition hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary"
@@ -114,14 +116,6 @@ const faqs = [
                             </li>
                         </ul>
                         <p class="mt-6 text-slate-700">If you have more questions, we would be glad to give you a tour.</p>
-                        <div class="mt-8">
-                            <Link
-                                href="#join-sunday"
-                                class="inline-flex items-center justify-center border border-transparent bg-neutral-tan px-6 py-3 text-xs font-semibold uppercase tracking-wider text-primary shadow-sm transition hover:bg-[#c9b5a4] focus:outline-none focus:ring-2 focus:ring-neutral-tan focus:ring-offset-2"
-                            >
-                                Plan Your Visit
-                            </Link>
-                        </div>
                     </div>
                 </div>
             </SectionContainer>
@@ -238,7 +232,7 @@ const faqs = [
                 </p>
                 <div class="mt-10">
                     <Link
-                        :href="route('connect')"
+                        :href="route('connect') + '#contact'"
                         class="inline-flex items-center justify-center border border-transparent bg-neutral-tan px-8 py-3 text-xs font-semibold uppercase tracking-wider text-primary shadow-sm transition hover:bg-[#c9b5a4] focus:outline-none focus:ring-2 focus:ring-neutral-tan focus:ring-offset-2 focus:ring-offset-primary"
                     >
                         Contact Us
@@ -256,14 +250,6 @@ const faqs = [
                     Jesus invites us into a family of faith. We would love to walk with you through celebration, struggle,
                     and growth.
                 </p>
-                <div class="mt-10">
-                    <Link
-                        :href="route('connect')"
-                        class="inline-flex items-center justify-center border border-transparent bg-neutral-tan px-8 py-3 text-xs font-semibold uppercase tracking-wider text-primary shadow-sm transition hover:bg-[#c9b5a4] focus:outline-none focus:ring-2 focus:ring-neutral-tan focus:ring-offset-2 focus:ring-offset-primary"
-                    >
-                        Contact Us
-                    </Link>
-                </div>
             </SectionContainer>
         </section>
     </PublicLayout>

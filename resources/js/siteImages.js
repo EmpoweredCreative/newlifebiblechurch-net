@@ -58,6 +58,8 @@ export const ministries = {
 
 export const kidsMinistry = {
     hero: siteImage('Kids Ministry/Untitled design (30).png'),
+    /** Add `public/images/Kids Ministry/CBC Jr Camp promo.png` when artwork is ready. */
+    cbcJrCampPromo: siteImage('Kids Ministry/CBC Jr Camp promo.png'),
     intro: siteImage('Kids Ministry/Your paragraph text (1).png'),
     whatToExpect: siteImage('Kids Ministry/Untitled design (29).png'),
     cta: siteImage('Kids Ministry/Untitled design (31).png'),

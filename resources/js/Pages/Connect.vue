@@ -7,7 +7,12 @@ import SectionContainer from '@/Components/SectionContainer.vue';
 import { connect } from '@/siteImages';
 import { Head, useForm, usePage } from '@inertiajs/vue3';
 import { route } from 'ziggy-js';
-import { computed, onMounted } from 'vue';
+import { computed, nextTick, onMounted } from 'vue';
+
+const pastorMailto =
+    'mailto:nate@newlifebiblechurch.net?subject=Connecting%20with%20New%20Life%20Bible%20Church';
+const prayerFormUrl = 'https://newlifebible.churchcenter.com/people/forms/1198013';
+const churchCenterGroupsUrl = 'https://newlifebible.churchcenter.com/groups';
 
 const page = usePage();
 const successMessage = computed(() => page.props.success);
@@ -25,6 +30,11 @@ const form = useForm({
 
 onMounted(() => {
     form.form_started_at = Date.now();
+    nextTick(() => {
+        if (window.location.hash === '#contact') {
+            document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
 });
 
 function submit() {
@@ -89,36 +99,71 @@ function submit() {
                 <p class="mx-auto mt-4 max-w-2xl text-center text-white/85">
                     Community matters. We want to know you—and for you to know us—through honest conversation and care.
                 </p>
-                <div class="mt-12 grid gap-6 md:grid-cols-2">
-                    <div class="border border-neutral-tan/80 bg-surface-light p-8 shadow-lg">
+                <div class="mt-12 grid gap-6 md:grid-cols-3">
+                    <a
+                        :href="pastorMailto"
+                        class="group block border border-neutral-tan/40 bg-white p-8 text-left shadow-lg transition hover:border-accent/50 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
+                    >
                         <h3 class="text-sm font-bold uppercase tracking-wider text-primary">Talk with a Pastor</h3>
                         <p class="mt-3 text-sm text-slate-700">
                             Questions about faith, baptism, or next steps? We'd be honored to listen and help.
                         </p>
-                    </div>
-                    <div class="border border-neutral-tan/80 bg-surface-light p-8 shadow-lg">
+                        <span class="mt-4 inline-block text-xs font-semibold uppercase tracking-wide text-accent group-hover:underline">
+                            Email us
+                        </span>
+                    </a>
+                    <a
+                        :href="prayerFormUrl"
+                        class="group block border border-neutral-tan/40 bg-white p-8 text-left shadow-lg transition hover:border-accent/50 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                    >
                         <h3 class="text-sm font-bold uppercase tracking-wider text-primary">Request Prayer</h3>
                         <p class="mt-3 text-sm text-slate-700">
                             Our team prays for the needs of our church family and community.
                         </p>
-                    </div>
-                    <div class="border border-neutral-tan/80 bg-surface-light p-8 shadow-lg">
+                        <span class="mt-4 inline-block text-xs font-semibold uppercase tracking-wide text-accent group-hover:underline">
+                            Open prayer form
+                        </span>
+                    </a>
+                    <a
+                        href="#church-center-groups"
+                        class="group block border border-neutral-tan/40 bg-white p-8 text-left shadow-lg transition hover:border-accent/50 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
+                    >
                         <h3 class="text-sm font-bold uppercase tracking-wider text-primary">Join a Group</h3>
                         <p class="mt-3 text-sm text-slate-700">
                             Grow in Scripture and friendship in a smaller group setting during the week.
                         </p>
-                    </div>
-                    <div class="border border-neutral-tan/80 bg-surface-light p-8 shadow-lg">
-                        <h3 class="text-sm font-bold uppercase tracking-wider text-primary">Ways to Serve</h3>
-                        <p class="mt-3 text-sm text-slate-700">
-                            Use your gifts to bless others—on Sundays and throughout the week.
-                        </p>
+                        <span class="mt-4 inline-block text-xs font-semibold uppercase tracking-wide text-accent group-hover:underline">
+                            Browse groups below
+                        </span>
+                    </a>
+                </div>
+            </SectionContainer>
+        </section>
+
+        <section id="church-center-groups" class="scroll-mt-28 bg-surface-light py-16">
+            <SectionContainer>
+                <h2 class="text-center text-3xl font-bold text-primary">Groups at New Life</h2>
+                <p class="mx-auto mt-4 max-w-2xl text-center text-slate-700">
+                    Our group directory lives on Planning Center Church Center. For security, their pages cannot be embedded
+                    on other websites—open the link below to browse groups, see meeting times, and sign up.
+                </p>
+                <div
+                    class="mx-auto mt-10 max-w-2xl rounded-sm border border-neutral-tan/50 bg-white p-10 text-center shadow-md"
+                >
+                    <p class="text-sm text-slate-600">
+                        You will leave this site and go to
+                        <span class="whitespace-nowrap font-medium text-primary">newlifebible.churchcenter.com</span>
+                    </p>
+                    <div class="mt-8">
+                        <PrimaryButton :href="churchCenterGroupsUrl">View groups on Church Center</PrimaryButton>
                     </div>
                 </div>
             </SectionContainer>
         </section>
 
-        <section class="bg-surface-cream py-16">
+        <section id="contact" class="scroll-mt-28 bg-surface-cream py-16">
             <SectionContainer>
                 <p class="text-center text-slate-700">
                     Send us a note and someone from our team will follow up shortly.
@@ -229,21 +274,6 @@ function submit() {
                         This form is for general inquiries. We handle your information carefully and do not sell your data.
                     </p>
                 </form>
-            </SectionContainer>
-        </section>
-
-        <section class="relative py-24">
-            <img :src="connect.comeAsYouAre" alt="" class="absolute inset-0 h-full w-full object-cover" />
-            <div class="absolute inset-0 bg-primary/70" />
-            <SectionContainer wrapper-class="relative z-10 text-center text-white">
-                <h2 class="text-3xl font-bold md:text-4xl">Come As You Are</h2>
-                <p class="mx-auto mt-6 max-w-xl text-lg text-white/90">
-                    You belong before you believe everything, and you are loved more than you know. Take a step toward
-                    community this week.
-                </p>
-                <div class="mt-10">
-                    <PrimaryButton :href="route('start-here')">Plan a Visit</PrimaryButton>
-                </div>
             </SectionContainer>
         </section>
     </PublicLayout>

@@ -83,7 +83,7 @@ const givingUrl = 'https://newlifebible.churchcenter.com/giving/to/general';
                             <Link :href="route('start-here')" class="text-slate-700 hover:text-accent">Plan a Visit</Link>
                         </li>
                         <li>
-                            <Link :href="route('connect')" class="text-slate-700 hover:text-accent">Contact Us</Link>
+                            <Link :href="`${route('connect')}#contact`" class="text-slate-700 hover:text-accent">Contact Us</Link>
                         </li>
                     </ul>
                 </div>

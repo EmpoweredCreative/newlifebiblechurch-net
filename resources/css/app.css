@@ -40,4 +40,7 @@
     .stagger-3 {
         animation-delay: 0.24s;
     }
+    .stagger-4 {
+        animation-delay: 0.32s;
+    }
 }

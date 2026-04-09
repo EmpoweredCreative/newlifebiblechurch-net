@@ -55,7 +55,7 @@
                 <ul class="space-y-2 text-sm">
                     <li><a href="{{ route('home') }}" class="text-slate-700 hover:text-accent">Join Us This Sunday</a></li>
                     <li><a href="{{ route('start-here') }}" class="text-slate-700 hover:text-accent">Plan a Visit</a></li>
-                    <li><a href="{{ route('connect') }}" class="text-slate-700 hover:text-accent">Contact Us</a></li>
+                    <li><a href="{{ route('connect') }}#contact" class="text-slate-700 hover:text-accent">Contact Us</a></li>
                 </ul>
             </div>
             <div>

@@ -9,6 +9,8 @@ import { Head, Link } from '@inertiajs/vue3';
 import { route } from 'ziggy-js';
 import { computed, ref } from 'vue';
 
+const youtubeChannelUrl = 'https://www.youtube.com/@NewLifeBibleChurchPA';
+
 const props = defineProps({
     featured: {
         type: Object,
@@ -111,7 +113,29 @@ function playFeaturedVideo() {
             </SectionContainer>
         </section>
 
-        <section class="bg-surface-light py-16">
+        <section class="border-y border-neutral-tan/40 bg-surface-light py-16">
+            <SectionContainer>
+                <div class="mx-auto max-w-3xl text-center">
+                    <h2 class="text-2xl font-bold text-primary md:text-3xl">Messages on YouTube</h2>
+                    <p class="mt-4 text-lg text-slate-700">
+                        Full messages and teaching also appear on our YouTube channel when they are published—subscribe so you
+                        never miss a week.
+                    </p>
+                    <div class="mt-8">
+                        <a
+                            :href="youtubeChannelUrl"
+                            class="inline-flex items-center justify-center rounded-sm bg-accent px-6 py-3 text-xs font-bold uppercase tracking-wider text-white shadow-sm transition hover:bg-accent/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                            rel="noopener noreferrer"
+                            target="_blank"
+                        >
+                            Open YouTube Channel
+                        </a>
+                    </div>
+                </div>
+            </SectionContainer>
+        </section>
+
+        <section class="bg-white py-16">
             <SectionContainer>
                 <div v-if="sermons.length" class="grid gap-8 md:grid-cols-3">
                     <Link
@@ -150,43 +174,6 @@ function playFeaturedVideo() {
                     </Link>
                 </div>
                 <p v-else class="text-center text-slate-600">More messages will be listed here when they are published.</p>
-            </SectionContainer>
-        </section>
-
-        <section class="bg-white py-16">
-            <SectionContainer>
-                <div class="grid gap-12 lg:grid-cols-2">
-                    <div>
-                        <h2 class="text-3xl font-bold text-primary">Join Us This Sunday</h2>
-                        <p class="mt-2 text-lg font-semibold text-primary">Sunday Service</p>
-                        <p class="mt-4 text-slate-700">9:30am–10:45am</p>
-                        <p class="text-slate-700">1950 N Hills Rd, York, PA 17406</p>
-                        <p class="mt-4 text-slate-700">
-                            <a href="tel:+17172528000" class="text-accent">(717) 252-8000</a>
-                        </p>
-                        <p class="mt-6 leading-relaxed text-slate-700">
-                            Whether you are new to church or have been following Jesus for years, you will find a welcoming
-                            room to learn and worship together.
-                        </p>
-                    </div>
-                    <div class="overflow-hidden rounded-sm shadow-md">
-                        <img :src="media.joinSunday" alt="Building" class="h-full w-full object-cover" />
-                    </div>
-                </div>
-            </SectionContainer>
-        </section>
-
-        <section class="relative py-24">
-            <img :src="media.comeAsYouAre" alt="" class="absolute inset-0 h-full w-full object-cover" />
-            <div class="absolute inset-0 bg-primary/70" />
-            <SectionContainer wrapper-class="relative z-10 text-center text-white">
-                <h2 class="text-3xl font-bold md:text-4xl">Come As You Are</h2>
-                <p class="mx-auto mt-6 max-w-xl text-lg text-white/90">
-                    You don't have to have it all figured out. Come meet Jesus and His people—right where you are.
-                </p>
-                <div class="mt-10">
-                    <PrimaryButton :href="route('start-here')">Plan a Visit</PrimaryButton>
-                </div>
             </SectionContainer>
         </section>
     </PublicLayout>
